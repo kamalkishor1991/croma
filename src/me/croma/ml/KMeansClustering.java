@@ -1,4 +1,4 @@
-package me.chroma.ml;
+package me.croma.ml;
 
 /**
  *Provide Implementation of K-means algorithm.

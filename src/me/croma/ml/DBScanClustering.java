@@ -1,4 +1,4 @@
-package me.chroma.ml;
+package me.croma.ml;
 
 import java.util.ArrayList;
 import java.util.Arrays;

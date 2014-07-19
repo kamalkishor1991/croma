@@ -1,17 +1,15 @@
-package me.chroma.test;
+package me.croma.test;
 
 
 
-import me.chroma.image.ColorPicker;
-import me.chroma.image.DBScanColorPicker;
-import me.chroma.image.KMeansColorPicker;
+import me.croma.image.ColorPicker;
+import me.croma.image.KMeansColorPicker;
 
 import java.awt.*;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.Arrays;
 
 public class TestColorPicker {
 	public static void main(String args[]) throws IOException {

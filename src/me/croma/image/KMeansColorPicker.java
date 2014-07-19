@@ -1,19 +1,23 @@
-package me.chroma.image;
+package me.croma.image;
 
-import me.chroma.ml.DBScanClustering;
+import me.croma.ml.KMeansClustering;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class DBScanColorPicker implements ColorPicker {
+public class KMeansColorPicker implements ColorPicker {
+
+	@Override
 	public List<Color> getProminentColors(File image, int noOfColors) throws IOException {
+
 		BufferedImage bi = ImageIO.read(image);
-		Image  im = bi.getScaledInstance(50, 50, BufferedImage.SCALE_DEFAULT);
+		Image  im = bi.getScaledInstance(2000, 2000, BufferedImage.SCALE_DEFAULT);
 		bi = toBufferedImage(im);
 		int h = bi.getHeight();
 		int w = bi.getWidth();
@@ -27,37 +31,9 @@ public class DBScanColorPicker implements ColorPicker {
 				input[index++][2] = (rgb) & (0xFF); //blue
 			}
 		}
-		DBScanClustering db = new DBScanClustering(input, (Math.sqrt(3) * 255)/noOfColors, 100);
-		int ans[] = db.startClustering();
-		boolean isNoise[] = db.getNoiseArray();
-		Map<Integer, Double[]> v = new HashMap<Integer, Double[]>();
-		Map<Integer, Integer> count = new HashMap<Integer, Integer>();
-		for (int i = 0;i < ans.length;i++) {
-			if(isNoise[i])continue;
-			Double d[] = new Double[]{0.0, 0.0, 0.0};
-			int ct = 1;
-			if(v.containsKey(ans[i])) {
-				d = v.get(ans[i]);
-				ct = count.get(ans[i]);
-				count.put(ans[i], ct + 1);
-			} else {
-				v.put(ans[i], d);
-				count.put(ans[i], ct);
-			}
-
-			d[0] += input[i][0];
-			d[1] += input[i][1];
-			d[2] += input[i][2];
-
-		}
-
-		//double m[][] = km.getMeans();
-		double m[][] = new double[v.size()][3];
-		int mi = 0;
-		for (int cluster: v.keySet()) {
-			Double td[] = v.get(cluster);
-			m[mi++] = new double[]{td[0]/count.get(cluster), td[1]/count.get(cluster), td[2]/count.get(cluster)};
-		}
+		KMeansClustering km = new KMeansClustering(noOfColors, input);
+		int ans[] = km.iterate(20);
+		double m[][] = km.getMeans();
 		for (int i = 0;i < m.length;i++) {
 			System.out.println(Arrays.toString(m[i]));
 		}
@@ -68,7 +44,7 @@ public class DBScanColorPicker implements ColorPicker {
 		}
 		return r;
 
-	//System.out.println(Arrays.toString(ans));
+		//System.out.println(Arrays.toString(ans));
 	}
 
 
@@ -96,6 +72,5 @@ public class DBScanColorPicker implements ColorPicker {
 		// Return the buffered image
 		return bimage;
 	}
-
 
 }

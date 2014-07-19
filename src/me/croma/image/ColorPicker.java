@@ -1,4 +1,4 @@
-package me.chroma.image;
+package me.croma.image;
 
 import java.awt.*;
 import java.io.File;

@@ -1,4 +1,4 @@
-## Chroma #
+## Croma #
 
 Provide classes for getting prominent colors from an image. 
 
