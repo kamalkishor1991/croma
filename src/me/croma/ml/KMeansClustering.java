@@ -2,9 +2,9 @@ package me.croma.ml;
 
 /**
  *Provide Implementation of K-means algorithm.
- * {@link #iterate()} is One Iteration of mean adjustment step.</br>
- * {@link #iterate(int)} N Iteration of mean adjustment step.</br>
- * {@link #cost()} can be used to get current cost of model.</br>
+ * {@link #iterate()} is One Iteration of mean adjustment step.
+ * {@link #iterate(int)} N Iteration of mean adjustment step.
+ * {@link #cost()} can be used to get current cost of model.
  */
 public class KMeansClustering {
 
