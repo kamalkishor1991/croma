@@ -6,5 +6,5 @@ Lib for getting useful colors from an image.
 
 TestColorPicker.java can be used to test.
 
-### [java doc](kamalkishor1991.github.com/croma/index.html)
+### [java doc](https://kamalkishor1991.github.com/croma/index.html)
 
