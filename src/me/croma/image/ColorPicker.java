@@ -19,5 +19,5 @@ public interface ColorPicker {
      * @throws IOException
      *
      */
-	public List<Color> getProminentColors(File image, int  noOfColors) throws IOException;
+	public List<Color> getUsefulColors(Image image, int  noOfColors) throws IOException;
 }
