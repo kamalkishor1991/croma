@@ -15,16 +15,23 @@ import java.io.IOException;
 import java.io.PrintStream;
 
 public class TestColorPicker {
-	public static void main(String args[]) throws IOException {
+	public static void main(String args[])  {
 		System.out.println(System.getProperty("user.dir"));
 		//System.out.println(Arrays.toString(new File(System.getProperty("user.dir")).list()));
-		//G:\jwork\Chroma\Data\Puppy-images.jpg
-		String file = "Puppy-images.jpg";
-		genColors(new File(System.getProperty("user.dir") + File.separator + "Data" + File.separator + file));
+        try {
+            String file = args.length != 0 ? args[0] :(System.getProperty("user.dir") + File.separator + "Data" + File.separator ) + "Puppy-images.jpg";
+            int algo = args.length >= 2 ? Integer.parseInt(args[2]) : 0;
+            int noOfColors = args.length >= 3 ? Integer.parseInt(args[1]) : 4;
 
-	}
+            genColors(new File(file),algo, 4);
+        } catch (IOException e) {
+            System.out.println("Usage: <Image path> <noOfColors> <algo (0 or 1)>");
+            e.printStackTrace();
+        }
 
-	private static void genColors(File file) throws IOException {
+    }
+
+	private static void genColors(File file, int algo, int noC) throws IOException {
 		String s = "<div color=\"#3CA\" style=\"\n" +
 				"    size: a3;\n" +
 				"    width: 50px;\n" +
@@ -33,17 +40,21 @@ public class TestColorPicker {
 				"\"></div>";
 
         //
+        int h = algo == 0 ? 1000 : 70;
+        int w = algo == 0 ? 1000 : 70;
+        Image img = new Image(getImage(file, w, h));
 
-        Image img = new Image(getImage(file));
-		ColorPicker km = new DBScanColorPicker();//new DBScanColorPicker();
-		java.util.List<Color> l = km.getUsefulColors(img, 3);
+		ColorPicker km = algo == 0 ? new KMeansColorPicker() : new DBScanColorPicker();//new DBScanColorPicker();
+		java.util.List<Color> l = km.getUsefulColors(img, noC);
 
-		PrintStream ps = new PrintStream(new FileOutputStream(file.getParentFile().getPath() + File.separator + file.getName() + ".html"));
+		PrintStream ps = new PrintStream(file.getAbsolutePath() + ".html");
 		ps.println("<HTML>");
 		ps.println("<BODY>");
-
+        ps.println("<IMG src = '" + file.getAbsolutePath() + "' style=\"\n" +
+                "    width: 500;\n" +
+                "\"></IMG>");
 		for (Color c : l) {
-			ps.println(String.format(s, "#" + String.format("%06x", c.getRGB() & 0x00FFFFFF)));
+			ps.print(String.format(s, "#" + String.format("%06x", c.getRGB() & 0x00FFFFFF)) + " ");
 		}
 
 		ps.println("</BODY>");
@@ -52,9 +63,8 @@ public class TestColorPicker {
 	}
 
 
-    public static int[][] getImage(File image) throws IOException {
-        int h = 50;
-        int w = 50;
+    public static int[][] getImage(File image, int w, int h) throws IOException {
+
         BufferedImage bi = ImageIO.read(image);
         java.awt.Image  im = bi.getScaledInstance(h, w, BufferedImage.SCALE_DEFAULT);
         bi = toBufferedImage(im);
