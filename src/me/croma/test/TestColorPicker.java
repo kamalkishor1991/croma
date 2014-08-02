@@ -19,11 +19,11 @@ public class TestColorPicker {
 		System.out.println(System.getProperty("user.dir"));
 		//System.out.println(Arrays.toString(new File(System.getProperty("user.dir")).list()));
         try {
-            String file = args.length != 0 ? args[0] :(System.getProperty("user.dir") + File.separator + "Data" + File.separator ) + "Puppy-images.jpg";
-            int algo = args.length >= 2 ? Integer.parseInt(args[2]) : 0;
+            String file = args.length != 0 ? args[0] :(System.getProperty("user.dir") + File.separator + "Data" + File.separator ) + "images-background.jpg";
+            int algo = args.length >= 2 ? Integer.parseInt(args[2]) : 1;
             int noOfColors = args.length >= 3 ? Integer.parseInt(args[1]) : 4;
 
-            genColors(new File(file),algo, 4);
+            genColors(new File(file),algo, noOfColors);
         } catch (IOException e) {
             System.out.println("Usage: <Image path> <noOfColors> <algo (0 or 1)>");
             e.printStackTrace();

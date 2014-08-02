@@ -2,10 +2,6 @@
 
 Lib for getting useful colors from an image.
 
-### How do I get set up? ###
-
-TestColorPicker.java can be used to test.
-
 ###Test
 Run:
 
@@ -13,5 +9,5 @@ Run:
      
   It will generate a html file with same name in image dir.
 
-### [java doc](https://kamalkishor1991.github.com/croma/index.html)
+### [java docs](https://kamalkishor1991.github.com/croma/index.html)
 
