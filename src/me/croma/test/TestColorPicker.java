@@ -6,6 +6,7 @@ import me.croma.image.*;
 import me.croma.image.Color;
 import me.croma.image.Image;
 
+import javax.activation.MimetypesFileTypeMap;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -13,26 +14,47 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class TestColorPicker {
 	public static void main(String args[])  {
-		System.out.println(System.getProperty("user.dir"));
+        System.out.println(System.getProperty("user.dir"));
 		//System.out.println(Arrays.toString(new File(System.getProperty("user.dir")).list()));
         try {
-            String file = args.length != 0 ? args[0] :(System.getProperty("user.dir") + File.separator + "Data" + File.separator ) + "images-background.jpg";
-            int algo = args.length >= 2 ? Integer.parseInt(args[2]) : 1;
-            int noOfColors = args.length >= 3 ? Integer.parseInt(args[1]) : 4;
+
+            String file = args.length != 0 ? args[0] :(System.getProperty("user.dir") + File.separator + "Data" + File.separator );
+           // file = "/media/kamal/New Volume/Photo (10.18.1.164)/Rock Garden/";
+            int algo = args.length >= 2 ? Integer.parseInt(args[2]) : 0;
+            int noOfColors = args.length >= 3 ? Integer.parseInt(args[1]) : 5;
 
             genColors(new File(file),algo, noOfColors);
         } catch (IOException e) {
-            System.out.println("Usage: <Image path> <noOfColors> <algo (0 or 1)>");
+            System.out.println("Usage: <Images dir path> <noOfColors> <algo (0 or 1)>");
             e.printStackTrace();
         }
 
     }
 
 	private static void genColors(File file, int algo, int noC) throws IOException {
-		String s = "<div color=\"#3CA\" style=\"\n" +
+        PrintStream ps = new PrintStream(file.getAbsolutePath() + "/output.html");
+
+        for (File f : file.listFiles()) {
+            if(isImage(f)) {
+                System.out.println(f);
+                genHtml(f, algo, noC, ps);
+            }
+        }
+
+		ps.println("</BODY>");
+		ps.println("</HTML>");
+		ps.close();
+	}
+
+    private static void genHtml(File file, int algo, int noC, PrintStream ps) throws IOException {
+        ps.println("<HTML>");
+        ps.println("<BODY>");
+        String s = "<div color=\"#3CA\" style=\"\n" +
 				"    size: a3;\n" +
 				"    width: 50px;\n" +
 				"    height: 50px;margin:10px;\n" +
@@ -40,27 +62,25 @@ public class TestColorPicker {
 				"\"></div>";
 
         //
-        int h = algo == 0 ? 1000 : 70;
-        int w = algo == 0 ? 1000 : 70;
-        Image img = new Image(getImage(file, w, h));
+        Image img = new AWTImage(file);
 
-		ColorPicker km = algo == 0 ? new KMeansColorPicker() : new DBScanColorPicker();//new DBScanColorPicker();
-		java.util.List<Color> l = km.getUsefulColors(img, noC);
+        ColorPicker km = algo == 0 ? new KMeansColorPicker() : new DBScanColorPicker();//new DBScanColorPicker();
+        java.util.List<Color> l = km.getUsefulColors(img, noC);
+        java.util.List<Color> t = new ArrayList<Color>();
+        for (Color c : l) {
+            float f[] = Color.RGBtoHSB(c.getRed(), c.getGreen(), c.getBlue());
+            //f[1] = 0.75F;
+            t.add(new Color(Color.HSBtoRGB(f[0], f[1], f[2])));
+        }
 
-		PrintStream ps = new PrintStream(file.getAbsolutePath() + ".html");
-		ps.println("<HTML>");
-		ps.println("<BODY>");
+
         ps.println("<IMG src = '" + file.getAbsolutePath() + "' style=\"\n" +
                 "    width: 500;\n" +
                 "\"></IMG>");
-		for (Color c : l) {
-			ps.print(String.format(s, "#" + String.format("%06x", c.getRGB() & 0x00FFFFFF)) + " ");
-		}
-
-		ps.println("</BODY>");
-		ps.println("</HTML>");
-		ps.close();
-	}
+        for (Color c : l) {
+            ps.print(String.format(s, "#" + String.format("%06x", c.getRGB() & 0x00FFFFFF)) + " ");
+        }
+    }
 
 
     public static int[][] getImage(File image, int w, int h) throws IOException {
@@ -105,5 +125,13 @@ public class TestColorPicker {
         return bimage;
     }
 
+
+
+    private static boolean isImage(File f) {
+        if(f.getName().toLowerCase().endsWith(".png")) return true;
+        String mimetype= new MimetypesFileTypeMap().getContentType(f);
+        String type = mimetype.split("/")[0];
+        return type.equalsIgnoreCase("image");
+    }
 
 }

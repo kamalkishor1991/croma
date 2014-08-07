@@ -19,7 +19,7 @@ public class DBScanColorPicker implements ColorPicker {
 		int index = 0;
 		for (int i = 0;i < w;i++) {
 			for (int j = 0;j < h;j++) {
-				int rgb = image.getRGB(i,j);
+				int rgb = image.getColor(i,j).getRGB();
 				input[index][0] = (rgb >> 16) & (0xFF);   //red
 				input[index][1] = (rgb >> 8) & (0xFF);  //green
 				input[index++][2] = (rgb) & (0xFF); //blue
