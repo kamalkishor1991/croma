@@ -10,7 +10,7 @@ import java.io.IOException;
  * Represent awt Image.
  */
 public class AWTImage extends Image  {
-    private BufferedImage br;
+    protected BufferedImage br;
     public AWTImage(BufferedImage br) {
         super(br.getWidth(), br.getHeight());
         this.br = br;
@@ -36,7 +36,7 @@ public class AWTImage extends Image  {
     @Override
     public Image getScaledInstance(int width, int height, int hints) {
         java.awt.Image  im = br.getScaledInstance(width, height, BufferedImage.SCALE_DEFAULT);
-        BufferedImage t = toBufferedImage(im);
+        BufferedImage t = AWTImage.toBufferedImage(im);
         return new AWTImage(t);
     }
 
@@ -48,7 +48,7 @@ public class AWTImage extends Image  {
      * @param img The Image to be converted
      * @return The converted BufferedImage
      */
-    private static BufferedImage toBufferedImage(java.awt.Image img)
+    public static BufferedImage toBufferedImage(java.awt.Image img)
     {
         if (img instanceof BufferedImage)
         {

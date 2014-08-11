@@ -24,6 +24,10 @@ public class Color {
         return color;
     }
 
+    public float[] getHSB() {
+        return Color.RGBtoHSB(r, g, b);
+    }
+
     public double getGreyScaleValue() {
         return .2989 * r + .5870 * g + .1140 * b;
     }

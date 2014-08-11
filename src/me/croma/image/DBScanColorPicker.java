@@ -25,7 +25,7 @@ public class DBScanColorPicker implements ColorPicker {
 				input[index++][2] = (rgb) & (0xFF); //blue
 			}
 		}
-		DBScanClustering db = new DBScanClustering(input, (Math.sqrt(3) * 255)/noOfColors, 100);
+		DBScanClustering db = new DBScanClustering(input, (2 * Math.sqrt(3) * 255)/(noOfColors), 70);
 		int ans[] = db.startClustering();
 		boolean isNoise[] = db.getNoiseArray();
 		Map<Integer, Double[]> v = new HashMap<Integer, Double[]>();
@@ -66,7 +66,6 @@ public class DBScanColorPicker implements ColorPicker {
 		}
 		return r;
 
-	//System.out.println(Arrays.toString(ans));
 	}
 
 }

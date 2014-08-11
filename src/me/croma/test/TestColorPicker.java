@@ -37,8 +37,7 @@ public class TestColorPicker {
     }
 
 	private static void genColors(File file, int algo, int noC) throws IOException {
-        PrintStream ps = new PrintStream(file.getAbsolutePath() + "/output.html");
-
+        PrintStream ps = new PrintStream(file.getAbsolutePath() + "/output" + algo + ".html");
         for (File f : file.listFiles()) {
             if(isImage(f)) {
                 System.out.println(f);
@@ -62,8 +61,8 @@ public class TestColorPicker {
 				"\"></div>";
 
         //
-        Image img = new AWTImage(file);
-
+        Image img = new AWTCromaImage(file);
+        img = algo == 0 ? img : img.getScaledInstance(60, 60, 0);
         ColorPicker km = algo == 0 ? new KMeansColorPicker() : new DBScanColorPicker();//new DBScanColorPicker();
         java.util.List<Color> l = km.getUsefulColors(img, noC);
         java.util.List<Color> t = new ArrayList<Color>();
@@ -74,7 +73,7 @@ public class TestColorPicker {
         }
 
 
-        ps.println("<IMG src = '" + file.getAbsolutePath() + "' style=\"\n" +
+        ps.println("<IMG src = './" + file.getName() + "' style=\"\n" +
                 "    width: 500;\n" +
                 "\"></IMG>");
         for (Color c : l) {
