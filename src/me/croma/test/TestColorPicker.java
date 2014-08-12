@@ -11,11 +11,9 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class TestColorPicker {
 	public static void main(String args[])  {
@@ -61,8 +59,8 @@ public class TestColorPicker {
 				"\"></div>";
 
         //
-        Image img = new AWTCromaImage(file);
-        img = algo == 0 ? img : img.getScaledInstance(60, 60, 0);
+        Image img = new AWTImage(file);
+        img = algo == 0 ? img : img.getScaledInstance(60, 60);
         ColorPicker km = algo == 0 ? new KMeansColorPicker() : new DBScanColorPicker();//new DBScanColorPicker();
         java.util.List<Color> l = km.getUsefulColors(img, noC);
         java.util.List<Color> t = new ArrayList<Color>();

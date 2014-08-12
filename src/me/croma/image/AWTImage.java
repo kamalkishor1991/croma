@@ -30,11 +30,10 @@ public class AWTImage extends Image  {
      *
      * @param width the width to which to scale the image.
      * @param height the height to which to scale the image.
-     * @param hints (Use {@link #SCALE_DEFAULT})
      * @return new scaled Instance of AWTImage
      */
     @Override
-    public Image getScaledInstance(int width, int height, int hints) {
+    public Image getScaledInstance(int width, int height) {
         java.awt.Image  im = br.getScaledInstance(width, height, BufferedImage.SCALE_DEFAULT);
         BufferedImage t = AWTImage.toBufferedImage(im);
         return new AWTImage(t);
