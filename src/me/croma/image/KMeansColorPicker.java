@@ -41,7 +41,7 @@ public class KMeansColorPicker implements ColorPicker {
         for (double c[] : m) {
             r.add(new Color((int)c[0], (int)c[1],(int) c[2]));
 		}
-        List<Color> ret = new ArrayList<Color>(r);
+        List<Color> ret = new ArrayList<Color>();
         for (Color c : r) {
             double min[] = input[0];
             double ct[] = {c.getRed(), c.getGreen(), c.getBlue()};
