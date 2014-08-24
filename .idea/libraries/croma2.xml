@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="croma">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/croma.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
