@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Using KMeans algorithm for clustering colors.
+ */
 public class KMeansColorPicker implements ColorPicker {
 
 	@Override

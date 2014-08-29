@@ -1,6 +1,8 @@
 package me.croma.image;
 
-
+/**
+ * Represent immutable Color Object
+ */
 public class Color {
     final private int color;
     final private int r, g, b;
@@ -112,7 +114,7 @@ public class Color {
      * <p>
      * The integer that is returned by <code>HSBtoRGB</code> encodes the
      * value of a color in bits 0-23 of an integer value that is the same
-     * format used by the method {@link #getRGB() <code>getRGB</code>}.
+     * format used by the method {@link me.croma.image.Color#getRGB()}  <code>getRGB</code>}.
      * This integer can be supplied as an argument to the
      * <code>Color</code> constructor that takes a single integer argument.
      * @param     hue   the hue component of the color

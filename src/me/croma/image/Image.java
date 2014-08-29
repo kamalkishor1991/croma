@@ -1,5 +1,9 @@
 package me.croma.image;
 
+/**
+ * It can be extended differentially on desktop(java.awt) and android(android.graphics).
+ * Classes using Image class can be used on both platforms.
+ */
 
 public abstract class Image {
 
@@ -30,7 +34,6 @@ public abstract class Image {
      * @param width the width to which to scale the image.
      * @param height the height to which to scale the image.
      * @return a scaled version of the image.
-     * @throws java.lang.IllegalArgumentException
      */
     public abstract Image getScaledInstance(int width, int height);
 }

@@ -2,14 +2,13 @@ package me.croma.image;
 
 import me.croma.ml.DBScanClustering;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.List;
 
+/**
+ * Using DBScan algorithm to cluster Colors.
+ */
 public class DBScanColorPicker implements ColorPicker {
 	public List<Color> getUsefulColors(Image image, int noOfColors) throws IOException {
 
