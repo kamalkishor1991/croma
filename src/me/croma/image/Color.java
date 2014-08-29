@@ -46,7 +46,7 @@ public class Color {
 
 
 
-    //using methods from java.awt.Color
+    //using methods from java awt Color
     /**
      * Converts the components of a color, as specified by the default RGB
      * model, to an equivalent set of values for hue, saturation, and
