@@ -7,8 +7,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 import java.util.List;
 
 /**
@@ -18,8 +17,11 @@ public class KMeansColorPicker implements ColorPicker {
 
 	@Override
 	public List<Color> getUsefulColors(Image img, int noOfColors) throws IOException {
-
-        Image image = img.getScaledInstance(500, 500);
+        int mx = Math.max(img.getHeight(), img.getWidth());
+        int mn = Math.min(img.getHeight(), img.getWidth());
+        int sh = Math.min(500, mx);
+        int sw = Math.min((int)(sh * (mn * 1.0)/mx), mn);
+        Image image = img.getScaledInstance(sh, sw);
 		int h = image.getHeight();
 		int w = image.getWidth();
 
@@ -28,7 +30,6 @@ public class KMeansColorPicker implements ColorPicker {
 		for (int i = 0;i < w;i++) {
 			for (int j = 0;j < h;j++) {
 				int rgb = image.getColor(i,j).getRGB();
-
                 Color c = new Color(rgb);
                 float f[] = {c.getRed(), c.getGreen(), c.getBlue()};
                 input[index][0] = f[0];
@@ -37,7 +38,7 @@ public class KMeansColorPicker implements ColorPicker {
 			}
 		}
 		KMeansClustering km = new KMeansClustering(noOfColors, input);
-		int ans[] = km.iterate(15);
+		km.iterate(30);
 		double m[][] = km.getMeans();
 		List<Color> r = new ArrayList<Color>(noOfColors);
 
@@ -45,6 +46,7 @@ public class KMeansColorPicker implements ColorPicker {
             r.add(new Color((int)c[0], (int)c[1],(int) c[2]));
 		}
         List<Color> ret = new ArrayList<Color>();
+        Set<Color> set = new HashSet<Color>();
         for (Color c : r) {
             double min[] = input[0];
             double ct[] = {c.getRed(), c.getGreen(), c.getBlue()};
@@ -55,7 +57,11 @@ public class KMeansColorPicker implements ColorPicker {
                     min = input[i];
                 }
             }
-            ret.add(new Color((int)min[0], (int)min[1], (int)min[2]));
+            Color cc = new Color((int)min[0], (int)min[1], (int)min[2]);
+            if (!set.contains(cc)) {
+                ret.add(cc);
+            }
+            set.add(cc);
         }
 
 		return ret;
