@@ -46,7 +46,34 @@ public class Color {
         return b;
     }
 
+    /**
+     * Convert this color to HEX String.
+     * @return #RRGGBB format string. RR-Hex of red, GG- Hex of Green BB- Hex of Blue
+     */
+    public String toHexString() {
+        return "#" + toHex(this.r) + toHex(this.g) + toHex(this.b);
+    }
 
+    private String toHex(int c) {
+        String s = Integer.toHexString(c);
+        if (s.length() == 1) s = "0" + s;
+        return s;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Color) {
+            Color c = (Color)obj;
+            return c.getRGB() == this.getRGB();
+        }
+        return false;
+    }
+
+
+    @Override
+    public int hashCode() {
+        return this.getRGB();
+    }
 
     //using methods from java.awt.Color
     /**
