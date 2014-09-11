@@ -1,5 +1,7 @@
 package me.croma.ml;
 
+import java.util.Random;
+
 /**
  *Provide Implementation of K-means algorithm.
  * {@link #iterate()} is One Iteration of mean adjustment step.
@@ -45,8 +47,10 @@ public class KMeansClustering {
 		for(int i = 0;i < k;i++) {
 			u[i] = input[i];
 		}
+        Random r = new Random((long)input[0][0]);
 		for(int i = k;i < input.length;i++) {
-			int j = (int)(Math.random()*i);
+
+			int j = (int)(r.nextDouble()*i);
 			if(j < k) {
 				u[j] = input[i];
 			}
