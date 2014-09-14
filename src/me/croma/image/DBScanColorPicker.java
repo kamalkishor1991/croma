@@ -10,8 +10,8 @@ import java.util.List;
  * Using DBScan algorithm to cluster Colors.
  */
 public class DBScanColorPicker implements ColorPicker {
-	public List<Color> getUsefulColors(Image image, int noOfColors) throws IOException {
-
+	public List<Color> getUsefulColors(Image img, int noOfColors) throws IOException {
+        Image image = img.getScaledInstance(Math.min(50, img.getWidth()), Math.min(img.getHeight(),50));
 		int h = image.getHeight();
 		int w = image.getWidth();
 		double input[][] = new double[h*w][3];
@@ -24,7 +24,7 @@ public class DBScanColorPicker implements ColorPicker {
 				input[index++][2] = (rgb) & (0xFF); //blue
 			}
 		}
-		DBScanClustering db = new DBScanClustering(input, (2 * Math.sqrt(3) * 255)/(noOfColors), 70);
+		DBScanClustering db = new DBScanClustering(input, (2.5 * Math.sqrt(3) * 255)/(noOfColors), 40);
 		int ans[] = db.startClustering();
 		boolean isNoise[] = db.getNoiseArray();
 		Map<Integer, Double[]> v = new HashMap<Integer, Double[]>();
@@ -55,10 +55,6 @@ public class DBScanColorPicker implements ColorPicker {
 			Double td[] = v.get(cluster);
 			m[mi++] = new double[]{td[0]/count.get(cluster), td[1]/count.get(cluster), td[2]/count.get(cluster)};
 		}
-		for (int i = 0;i < m.length;i++) {
-			System.out.println(Arrays.toString(m[i]));
-		}
-
 		List<Color> r = new ArrayList<Color>(noOfColors);
 		for (double c[] : m) {
 			r.add(new Color((int)Math.round(c[0]), (int)Math.round(c[1]), (int)Math.round(c[2])));

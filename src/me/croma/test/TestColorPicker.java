@@ -24,7 +24,7 @@ public class TestColorPicker {
             String file = args.length != 0 ? args[0] :(System.getProperty("user.dir") + File.separator + "Data" + File.separator );
            // file = "/media/kamal/New Volume/Photo (10.18.1.164)/Rock Garden/";
             int algo = args.length >= 2 ? Integer.parseInt(args[2]) : 0;
-            int noOfColors = args.length >= 3 ? Integer.parseInt(args[1]) : 5;
+            int noOfColors = args.length >= 3 ? Integer.parseInt(args[1]) : 6;
 
             genColors(new File(file),algo, noOfColors);
         } catch (IOException e) {
@@ -60,8 +60,8 @@ public class TestColorPicker {
 
         //
         Image img = new AWTImage(file);
-        img = algo == 0 ? img : img.getScaledInstance(60, 60);
         ColorPicker km = algo == 0 ? new KMeansColorPicker() : new DBScanColorPicker();//new DBScanColorPicker();
+        if (algo == 2) km = new MedianCutColorPicker();
         java.util.List<Color> l = km.getUsefulColors(img, noC);
         java.util.List<Color> t = new ArrayList<Color>();
         for (Color c : l) {

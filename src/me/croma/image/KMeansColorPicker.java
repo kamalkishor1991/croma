@@ -19,7 +19,7 @@ public class KMeansColorPicker implements ColorPicker {
 	public List<Color> getUsefulColors(Image img, int noOfColors) throws IOException {
         int mx = Math.max(img.getHeight(), img.getWidth());
         int mn = Math.min(img.getHeight(), img.getWidth());
-        int sh = Math.min(500, mx);
+        int sh = Math.min(400, mx);
         int sw = Math.min((int)(sh * (mn * 1.0)/mx), mn);
         Image image = img.getScaledInstance(sh, sw);
 		int h = image.getHeight();
@@ -38,7 +38,7 @@ public class KMeansColorPicker implements ColorPicker {
 			}
 		}
 		KMeansClustering km = new KMeansClustering(noOfColors, input);
-		km.iterate(30);
+		km.iterate(20);
 		double m[][] = km.getMeans();
 		List<Color> r = new ArrayList<Color>(noOfColors);
 
