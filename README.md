@@ -3,7 +3,7 @@
 Lib for getting useful colors from an image.
 
 ###Test
-Run:
+switch to dev branch and Run:
 
      java -jar croma.jar <Image dir. path> <noOfColors> <algo (0 or 1)> 
      
@@ -65,4 +65,4 @@ public class BitmapImage extends Image {
 ```
 Desktop Implementation using awt package
 
-[AWTImage.java](https://github.com/kamalkishor1991/croma/blob/master/src/me/croma/image/AWTImage.java)
+[AWTImage.java](https://github.com/kamalkishor1991/croma/blob/dev/src/me/croma/image/AWTImage.java)
