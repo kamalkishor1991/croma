@@ -10,6 +10,11 @@ import java.util.List;
  * Using DBScan algorithm to cluster Colors.
  */
 public class DBScanColorPicker implements ColorPicker {
+
+    public DBScanColorPicker() {
+
+    }
+
 	public List<Color> getUsefulColors(Image img, int noOfColors) throws IOException {
         Image image = img.getScaledInstance(Math.min(50, img.getWidth()), Math.min(img.getHeight(),50));
 		int h = image.getHeight();

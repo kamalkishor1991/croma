@@ -8,6 +8,11 @@ import java.util.Set;
 
 public class MedianCutColorPicker implements ColorPicker {
 
+    public MedianCutColorPicker() {
+
+    }
+
+
     @Override
     public List<Color> getUsefulColors(Image img, int noOfColors) throws IOException {
         Image image = img.getScaledInstance(noOfColors, 1);
@@ -22,4 +27,5 @@ public class MedianCutColorPicker implements ColorPicker {
         }
         return r;
     }
+
 }
