@@ -10,8 +10,18 @@ Run:
   It will generate a output.html file in given dir.
 
 ###Release
+
 ####v1.0
 [Download jar](https://github.com/kamalkishor1991/croma/blob/r1.0/croma.jar?raw=true)
+####v1.1
+[Download jar](https://github.com/kamalkishor1991/croma/raw/r1.1/croma1.1.jar?raw=true)
+  1. Bug fixes
+  2. New ColorPicker implementation based on Median Cut
+
+####v1.2
+[Download jar](https://github.com/kamalkishor1991/croma/raw/r1.2/croma1.2.jar?raw=true)
+  1. New distance calculation based on LAB color space.
+
 
 ### [java docs](https://kamalkishor1991.github.com/croma/index.html)
 
