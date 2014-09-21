@@ -21,7 +21,7 @@ public class TestColorPicker {
 		//System.out.println(Arrays.toString(new File(System.getProperty("user.dir")).list()));
         try {
 
-            String file = args.length != 0 ? args[0] :(System.getProperty("user.dir") + File.separator + "Data" + File.separator );
+            String file = args.length != 0 ? args[0] :(System.getProperty("user.dir") + File.separator + "test" + File.separator );
            // file = "/media/kamal/New Volume/Photo (10.18.1.164)/Rock Garden/";
             int algo = args.length >= 2 ? Integer.parseInt(args[2]) : 0;
             int noOfColors = args.length >= 3 ? Integer.parseInt(args[1]) : 6;
