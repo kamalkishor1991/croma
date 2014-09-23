@@ -11,11 +11,71 @@ import java.util.List;
  * Using KMeans algorithm for clustering colors.
  */
 public class KMeansColorPicker implements ColorPicker {
+    final ColorSpaceConverter cs = new ColorSpaceConverter();
     public KMeansColorPicker() {
         //default constructor
     }
-	@Override
-	public List<Color> getUsefulColors(Image img, int noOfColors) throws IOException {
+
+    @Override
+    public List<Color> getUsefulColors(Image image, int noOfColors) throws IOException {
+        int m = 4;
+        List<Color> l = getKColors(image, noOfColors * m);
+        Collections.sort(l, new Comparator<Color>() {
+            @Override
+            public int compare(Color o1, Color o2) {
+                float d1[] = o1.getHSB();
+                float d2[] = o2.getHSB();
+                return d1[0] >= d2[0] ? 1 : -1;
+            }
+        });
+        int n = m/2;
+        List<Color> r = new ArrayList<Color>();
+        for (int i = 0;i < l.size();i += m) {
+            List<Color> ll = new ArrayList<Color>();
+            for (int j = 0;j < m;j++) {
+                if (i + j < l.size()) ll.add(l.get(i + j));
+            }
+            Collections.sort(ll, new Comparator<Color>() {
+                @Override
+                public int compare(Color o1, Color o2) {
+                    return Double.compare(o1.getHSB()[1], o2.getHSB()[1]);
+                }
+            });
+            for (int j = 0;j < n;j++) {
+                if (ll.size() - j > 0) r.add(ll.get(ll.size() - 1 - j));//add pure colors.
+            }
+            //r.add(ll.get(ll.size() - 1));
+        }
+
+        List<Color> rr = new ArrayList<Color>();
+        for (int i = 0;i < r.size();i += n) {
+            List<Color> ll = new ArrayList<Color>();
+            for (int j = 0;j < n;j++) {
+                if (i + j < r.size()) ll.add(r.get(i + j));
+            }
+            Collections.sort(ll, new Comparator<Color>() {
+                @Override
+                public int compare(Color o1, Color o2) {
+                    return Double.compare(o1.getHSB()[2], o2.getHSB()[2]);
+                }
+            });
+            rr.add(ll.get(ll.size() - 1));
+            //r.add(ll.get(ll.size() - 1));
+        }
+
+
+
+
+
+        //List<Color> r = l.subList(0, noOfColors);
+        for (int i = 0 ;i < l.size();i++) {
+            System.out.print(l.get(i).getHSB()[0] + ",");
+        }
+        return rr;
+    }
+
+
+	public List<Color> getKColors(Image img, int noOfColors) throws IOException {
         int mx = Math.max(img.getHeight(), img.getWidth());
         int mn = Math.min(img.getHeight(), img.getWidth());
         int sh = Math.min(100, mx);
@@ -24,7 +84,7 @@ public class KMeansColorPicker implements ColorPicker {
 		int h = image.getHeight();
 		int w = image.getWidth();
 		double input[][] = new double[h*w][3];
-        ColorSpaceConverter cs = new ColorSpaceConverter();
+
 		int index = 0;
 		for (int i = 0;i < w;i++) {
 			for (int j = 0;j < h;j++) {
@@ -65,6 +125,7 @@ public class KMeansColorPicker implements ColorPicker {
         }
         return r;
     }
+
 
 
 }

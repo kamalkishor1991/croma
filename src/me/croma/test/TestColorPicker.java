@@ -54,6 +54,7 @@ public class TestColorPicker {
         String s = "<div color=\"#3CA\" style=\"\n" +
 				"    size: a3;\n" +
 				"    width: 50px;\n" +
+                "display: table-cell;\n" +
 				"    height: 50px;margin:10px;\n" +
 				"    background: %s\n" +
 				"\"></div>";
@@ -73,10 +74,14 @@ public class TestColorPicker {
 
         ps.println("<IMG src = './" + file.getName() + "' style=\"\n" +
                 "    width: 500;\n" +
-                "\"></IMG>");
+                "\"></IMG><div style=\"\n" +
+                "    margin-top: 10px;\n" +
+                "    margin-bottom: 10px;\n" +
+                "\"><p>" + file.getName() + "</p>");
         for (Color c : l) {
             ps.print(String.format(s, "#" + String.format("%06x", c.getRGB() & 0x00FFFFFF)) + " ");
         }
+        ps.print("</div>");
     }
 
 
