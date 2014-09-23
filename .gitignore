@@ -1,4 +1,7 @@
-Data/*.html
-local
+*~
+.DS_Store
 .idea
+
+test/*.html
+local
 output
