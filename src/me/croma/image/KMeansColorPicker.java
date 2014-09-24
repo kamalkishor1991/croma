@@ -11,7 +11,7 @@ import java.util.List;
  * Using KMeans algorithm for clustering colors.
  */
 public class KMeansColorPicker implements ColorPicker {
-    final ColorSpaceConverter cs = new ColorSpaceConverter();
+    private final ColorSpaceConverter cs = new ColorSpaceConverter();
     public KMeansColorPicker() {
         //default constructor
     }
@@ -44,7 +44,6 @@ public class KMeansColorPicker implements ColorPicker {
             for (int j = 0;j < n;j++) {
                 if (ll.size() - j > 0) r.add(ll.get(ll.size() - 1 - j));//add pure colors.
             }
-            //r.add(ll.get(ll.size() - 1));
         }
 
         List<Color> rr = new ArrayList<Color>();
@@ -59,23 +58,17 @@ public class KMeansColorPicker implements ColorPicker {
                     return Double.compare(o1.getHSB()[2], o2.getHSB()[2]);
                 }
             });
-            rr.add(ll.get(ll.size() - 1));
-            //r.add(ll.get(ll.size() - 1));
+            if (ll.size() > 0) rr.add(ll.get(ll.size() - 1));
         }
-
-
-
-
-
-        //List<Color> r = l.subList(0, noOfColors);
+       /* //List<Color> r = l.subList(0, noOfColors);
         for (int i = 0 ;i < l.size();i++) {
             System.out.print(l.get(i).getHSB()[0] + ",");
-        }
+        }*/
         return rr;
     }
 
 
-	public List<Color> getKColors(Image img, int noOfColors) throws IOException {
+	private List<Color> getKColors(Image img, int noOfColors) throws IOException {
         int mx = Math.max(img.getHeight(), img.getWidth());
         int mn = Math.min(img.getHeight(), img.getWidth());
         int sh = Math.min(100, mx);
@@ -108,8 +101,6 @@ public class KMeansColorPicker implements ColorPicker {
             set.add(cc);
 		}
 		return r;
-
-		//System.out.println(Arrays.toString(ans));
 	}
 
     /**
