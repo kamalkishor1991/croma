@@ -21,6 +21,11 @@ Run:
 ####v1.2
 [Download jar](https://github.com/kamalkishor1991/croma/raw/r1.2/croma1.2.jar?raw=true)
   1. New distance calculation based on LAB color space.
+  
+####v1.3
+[Download jar](https://github.com/kamalkishor1991/croma/raw/r1.3/croma1.3.jar?raw=true)
+  1. Final filtering based on HSL color space.  
+  
 
 
 ### [java docs](https://kamalkishor1991.github.com/croma/index.html)
