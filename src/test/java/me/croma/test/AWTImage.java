@@ -1,4 +1,4 @@
-package me.croma.image;
+package me.croma.test;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -9,7 +9,7 @@ import java.io.IOException;
 /**
  * Represent awt Image.
  */
-public class AWTImage extends Image  {
+public class AWTImage extends me.croma.image.Image {
     protected BufferedImage br;
     public AWTImage(BufferedImage br) {
         super(br.getWidth(), br.getHeight());
@@ -21,8 +21,8 @@ public class AWTImage extends Image  {
     }
 
     @Override
-    public Color getColor(int x, int y) {
-        return new Color(br.getRGB(x, y));
+    public me.croma.image.Color getColor(int x, int y) {
+        return new me.croma.image.Color(br.getRGB(x, y));
     }
 
 
@@ -33,7 +33,7 @@ public class AWTImage extends Image  {
      * @return new scaled Instance of AWTImage
      */
     @Override
-    public Image getScaledInstance(int width, int height) {
+    public me.croma.image.Image getScaledInstance(int width, int height) {
         java.awt.Image  im = br.getScaledInstance(width, height, BufferedImage.SCALE_DEFAULT);
         BufferedImage t = AWTImage.toBufferedImage(im);
         return new AWTImage(t);
