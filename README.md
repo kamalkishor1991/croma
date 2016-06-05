@@ -26,6 +26,10 @@ Run:
 [Download jar](https://github.com/kamalkishor1991/croma/raw/r1.3/croma1.3.jar?raw=true)
   1. Final filtering based on HSL color space.  
   
+####v1.4
+  1. Fixed a bug in LAB to RGB conversion
+  2. Added new methods to convert RGB to LAB in Color class
+  3. DBScanColorPicker is now deprecated 
 
 
 ### [java docs](https://kamalkishor1991.github.com/croma/index.html)
