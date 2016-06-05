@@ -27,12 +27,13 @@ Run:
   1. Final filtering based on HSL color space.  
   
 ####v1.4
+[Download jar](https://github.com/kamalkishor1991/croma/blob/r1.4/croma-1.4.jar?raw=true)
   1. Fixed a bug in LAB to RGB conversion
   2. Added new methods to convert RGB to LAB in Color class
   3. DBScanColorPicker is now deprecated 
 
 
-### [java docs](https://kamalkishor1991.github.com/croma/index.html)
+
 
 ###Usage
 This library can be used for both android and desktop systems.
@@ -78,4 +79,4 @@ public class BitmapImage extends Image {
 ```
 Desktop Implementation using awt package
 
-[AWTImage.java](https://github.com/kamalkishor1991/croma/blob/master/src/me/croma/image/AWTImage.java)
+[AWTImage.java](https://github.com/kamalkishor1991/croma/blob/master/src/test/java/me/croma/test/AWTImage.java)
