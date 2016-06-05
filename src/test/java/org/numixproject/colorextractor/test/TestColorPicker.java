@@ -1,10 +1,9 @@
-package me.croma.test;
+package org.numixproject.colorextractor.test;
 
 
 
-import me.croma.image.*;
-import me.croma.image.Color;
-import me.croma.image.Image;
+import org.numixproject.colorextractor.image.*;
+import org.numixproject.colorextractor.image.Color;
 
 import javax.activation.MimetypesFileTypeMap;
 import javax.imageio.ImageIO;
@@ -59,7 +58,7 @@ public class TestColorPicker {
 				"\"></div>";
 
         //
-        Image img = new AWTImage(file);
+        org.numixproject.colorextractor.image.Image img = new AWTImage(file);
         ColorPicker km = algo == 0 ? new KMeansColorPicker() : new DBScanColorPicker();//new DBScanColorPicker();
         if (algo == 2) km = new MedianCutColorPicker();
         java.util.List<Color> l = km.getUsefulColors(img, noC);

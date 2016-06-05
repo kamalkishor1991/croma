@@ -1,4 +1,4 @@
-package me.croma.image;
+package org.numixproject.colorextractor.image;
 
 import java.io.IOException;
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
-package me.croma.image;
+package org.numixproject.colorextractor.image;
 
-import me.croma.ml.KMeansClustering;
+import org.numixproject.colorextractor.ml.KMeansClustering;
 
 
 import java.io.IOException;

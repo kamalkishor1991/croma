@@ -1,14 +1,12 @@
-package me.croma.image;
+package org.numixproject.colorextractor.image;
 
-import java.awt.*;
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
 /**
  * Get useful colors from an Image.
- * @see me.croma.image.DBScanColorPicker
- * @see me.croma.image.KMeansColorPicker
+ * @see DBScanColorPicker
+ * @see KMeansColorPicker
  */
 public interface ColorPicker {
     /**
@@ -18,5 +16,5 @@ public interface ColorPicker {
      * @return List of colors
      * @throws IOException If error in reading Image
      */
-	public List<Color> getUsefulColors(Image image, int  noOfColors) throws IOException;
+	public List<org.numixproject.colorextractor.image.Color> getUsefulColors(org.numixproject.colorextractor.image.Image image, int  noOfColors) throws IOException;
 }

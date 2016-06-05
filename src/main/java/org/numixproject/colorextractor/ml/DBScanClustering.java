@@ -1,4 +1,4 @@
-package me.croma.ml;
+package org.numixproject.colorextractor.ml;
 
 import java.util.ArrayList;
 import java.util.Arrays;

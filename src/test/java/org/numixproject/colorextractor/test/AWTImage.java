@@ -1,4 +1,6 @@
-package me.croma.test;
+package org.numixproject.colorextractor.test;
+
+import org.numixproject.colorextractor.image.Color;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -9,7 +11,7 @@ import java.io.IOException;
 /**
  * Represent awt Image.
  */
-public class AWTImage extends me.croma.image.Image {
+public class AWTImage extends org.numixproject.colorextractor.image.Image {
     protected BufferedImage br;
     public AWTImage(BufferedImage br) {
         super(br.getWidth(), br.getHeight());
@@ -21,8 +23,8 @@ public class AWTImage extends me.croma.image.Image {
     }
 
     @Override
-    public me.croma.image.Color getColor(int x, int y) {
-        return new me.croma.image.Color(br.getRGB(x, y));
+    public org.numixproject.colorextractor.image.Color getColor(int x, int y) {
+        return new Color(br.getRGB(x, y));
     }
 
 
@@ -33,7 +35,7 @@ public class AWTImage extends me.croma.image.Image {
      * @return new scaled Instance of AWTImage
      */
     @Override
-    public me.croma.image.Image getScaledInstance(int width, int height) {
+    public org.numixproject.colorextractor.image.Image getScaledInstance(int width, int height) {
         java.awt.Image  im = br.getScaledInstance(width, height, BufferedImage.SCALE_DEFAULT);
         BufferedImage t = AWTImage.toBufferedImage(im);
         return new AWTImage(t);

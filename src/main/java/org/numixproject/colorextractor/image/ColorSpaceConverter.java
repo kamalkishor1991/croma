@@ -1,4 +1,4 @@
-package me.croma.image;
+package org.numixproject.colorextractor.image;
 //copied from here : http://rsb.info.nih.gov/ij/plugins/download/Color_Space_Converter.java
 /**
  * ColorSpaceConverter

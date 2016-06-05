@@ -1,4 +1,4 @@
-package me.croma.image;
+package org.numixproject.colorextractor.image;
 
 /**
  * It can be extended differentially on desktop(java.awt) and android(android.graphics).

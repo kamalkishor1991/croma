@@ -1,6 +1,6 @@
-package me.croma.image;
+package org.numixproject.colorextractor.image;
 
-import me.croma.ml.DBScanClustering;
+import org.numixproject.colorextractor.ml.DBScanClustering;
 
 import java.io.IOException;
 import java.util.*;
