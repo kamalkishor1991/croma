@@ -4,12 +4,18 @@
 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>me.croma</groupId>
-    <artifactId>croma</artifactId>
+    <groupId>org.numixproject.colorextractor</groupId>
+    <artifactId>colorextractor</artifactId>
     <version>1.4</version>
     <name>Croma</name>
     <packaging>jar</packaging>
+    <distributionManagement>
+        <repository>
+            <id>bintray</id>
 
+            <url>https://api.bintray.com/maven/kamalkishor1991/maven/org.numixproject.colorextractor/;publish=1</url>
+        </repository>
+    </distributionManagement>
     <build>
        <plugins>
             <plugin>
