@@ -18,9 +18,9 @@ public class KMeansColorPicker implements ColorPicker {
 
     @Override
     public List<Color> getUsefulColors(Image image, int noOfColors) throws IOException {
-        int m = 4;
-        List<Color> l = getKColors(image, noOfColors * m);
-        Collections.sort(l, new Comparator<Color>() {
+        int multiplier = 4;
+        List<Color> kMeansColors = getKColors(image, noOfColors * multiplier);
+        Collections.sort(kMeansColors, new Comparator<Color>() {
             @Override
             public int compare(Color o1, Color o2) {
                 float d1[] = o1.getHSB();
@@ -28,12 +28,12 @@ public class KMeansColorPicker implements ColorPicker {
                 return d1[0] >= d2[0] ? 1 : -1;
             }
         });
-        int n = m/2;
-        List<Color> r = new ArrayList<Color>();
-        for (int i = 0;i < l.size();i += m) {
+        int n = multiplier / 2;
+        List<Color> r = new ArrayList<>();
+        for (int i = 0;i < kMeansColors.size();i += multiplier) {
             List<Color> ll = new ArrayList<Color>();
-            for (int j = 0;j < m;j++) {
-                if (i + j < l.size()) ll.add(l.get(i + j));
+            for (int j = 0;j < multiplier;j++) {
+                if (i + j < kMeansColors.size()) ll.add(kMeansColors.get(i + j));
             }
             Collections.sort(ll, new Comparator<Color>() {
                 @Override
@@ -46,9 +46,9 @@ public class KMeansColorPicker implements ColorPicker {
             }
         }
 
-        List<Color> rr = new ArrayList<Color>();
+        List<Color> finalColors = new ArrayList<>();
         for (int i = 0;i < r.size();i += n) {
-            List<Color> ll = new ArrayList<Color>();
+            List<Color> ll = new ArrayList<>();
             for (int j = 0;j < n;j++) {
                 if (i + j < r.size()) ll.add(r.get(i + j));
             }
@@ -58,13 +58,10 @@ public class KMeansColorPicker implements ColorPicker {
                     return Double.compare(o1.getHSB()[2], o2.getHSB()[2]);
                 }
             });
-            if (ll.size() > 0) rr.add(ll.get(ll.size() - 1));
+            if (ll.size() > 0) finalColors.add(ll.get(ll.size() - 1));
         }
-       /* //List<Color> r = l.subList(0, noOfColors);
-        for (int i = 0 ;i < l.size();i++) {
-            System.out.print(l.get(i).getHSB()[0] + ",");
-        }*/
-        return rr;
+
+        return finalColors;
     }
 
 
@@ -92,31 +89,14 @@ public class KMeansColorPicker implements ColorPicker {
 		KMeansClustering km = new KMeansClustering(noOfColors, input);
 		km.iterate(20);
 		double m[][] = km.getMeans();
-		List<Color> r = new ArrayList<Color>(noOfColors);
-        Set<Color> set = new HashSet<Color>();
+        Set<Color> setToRet = new HashSet<>();
         for (double c[] : m) {
             int ct[] = cs.LABtoRGB(c);
             Color cc = new Color(ct[0], ct[1], ct[2]);
-            if (!set.contains(cc)) r.add(cc);
-            set.add(cc);
+            setToRet.add(cc);
 		}
-		return r;
+		return new ArrayList<>(setToRet);
 	}
-
-    /**
-     * Euclidean distance
-     * @param input1 input vector 1
-     * @param input2 input vector 2
-     * @return distance b/w two input vectors
-     */
-    private double distance(double input1[], double input2[]) {
-        double r = 0;
-        for(int i = 0;i < input1.length;i++) {
-            r += (input1[i] - input2[i]) * (input1[i] - input2[i]);
-        }
-        return r;
-    }
-
 
 
 }

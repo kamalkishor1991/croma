@@ -367,6 +367,13 @@ public class ColorSpaceConverter {
         g = (g < 0) ? 0 : g;
         b = (b < 0) ? 0 : b;
 
+        // LAB to RGB conversion is wrong thats why adding check
+       // 91.28654738944347, -3.6725617351839017,52.83941149939641
+
+        r = r > 1 ? 1 : r;
+        g = g > 1 ? 1 : g;
+        b = b > 1 ? 1 : b;
+
         // convert 0..1 into 0..255
         result[0] = (int) Math.round(r * 255);
         result[1] = (int) Math.round(g * 255);

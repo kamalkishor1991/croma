@@ -8,7 +8,9 @@ import java.util.List;
 
 /**
  * Using DBScan algorithm to cluster Colors.
+ *@deprecated Use KMeansColorPicker
  */
+@Deprecated
 public class DBScanColorPicker implements ColorPicker {
 
     public DBScanColorPicker() {
