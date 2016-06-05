@@ -4,6 +4,7 @@ package me.croma.image;
  * Represent immutable Color Object
  */
 public class Color {
+    private static final ColorSpaceConverter colorSpaceConverter = new ColorSpaceConverter();
     final private int color;
     final private int r, g, b;
 
@@ -44,6 +45,10 @@ public class Color {
 
     public int getBlue() {
         return b;
+    }
+
+    public double[] toLAB() {
+        return colorSpaceConverter.RGBtoLAB(r, g, b);
     }
 
     /**
