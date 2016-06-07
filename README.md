@@ -4,6 +4,19 @@ Lib for getting useful colors from an image.
 
 ###Release
 
+Croma is now avialable at jcenter.
+####Gradle
+``` compile 'org.numixproject.colorextractor:colorextractor:1.4' ```
+####Maven
+```
+<dependency>
+  <groupId>org.numixproject.colorextractor</groupId>
+  <artifactId>colorextractor</artifactId>
+  <version>1.4</version>
+  <type>pom</type>
+</dependency>
+```
+
 ####v1.0
 [Download jar](https://github.com/kamalkishor1991/croma/blob/r1.0/croma.jar?raw=true)
 ####v1.1
