@@ -33,7 +33,7 @@ Croma is now avialable at jcenter.
   1. Final filtering based on HSL color space.  
   
 ####v1.4
-[Download jar](https://jcenter.bintray.com/org/numixproject/colorextractor/colorextractor/1.4/:colorextractor-1.4.jar)
+[Download jar](https://jcenter.bintray.com/org/numixproject/colorextractor/colorextractor/1.4/colorextractor-1.4.jar)
   1. Fixed a bug in LAB to RGB conversion
   2. Added new methods to convert RGB to LAB in Color class
   3. DBScanColorPicker is now deprecated 
