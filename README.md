@@ -86,3 +86,7 @@ public class BitmapImage extends Image {
 Desktop Implementation using awt package
 
 [AWTImage.java](https://github.com/kamalkishor1991/croma/blob/master/src/test/java/me/croma/test/AWTImage.java)
+
+
+## License:
+Croma is licensed under MIT. For more information see [https://opensource.org/licenses/MIT](https://opensource.org/licenses/MIT)
