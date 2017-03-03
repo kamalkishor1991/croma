@@ -31,7 +31,8 @@ public abstract class Image {
 
     /**
      * Creates a scaled version of this image. A new Image object is returned
-     * @param width the width to which to scale the image.
+     *
+     * @param width  the width to which to scale the image.
      * @param height the height to which to scale the image.
      * @return a scaled version of the image.
      */

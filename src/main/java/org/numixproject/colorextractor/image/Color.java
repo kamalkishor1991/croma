@@ -16,7 +16,7 @@ public class Color {
     }
 
     public Color(int red, int green, int blue) {
-        this.color  = ((red << 16)) | (green << 8) |  (blue);
+        this.color = ((red << 16)) | (green << 8) | (blue);
         this.r = red;
         this.g = green;
         this.b = blue;
@@ -53,6 +53,7 @@ public class Color {
 
     /**
      * Convert this color to HEX String.
+     *
      * @return #RRGGBB format string. RR-Hex of red, GG- Hex of Green BB- Hex of Blue
      */
     public String toHexString() {
@@ -68,7 +69,7 @@ public class Color {
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Color) {
-            Color c = (Color)obj;
+            Color c = (Color) obj;
             return c.getRGB() == this.getRGB();
         }
         return false;
@@ -81,6 +82,7 @@ public class Color {
     }
 
     //using methods from java.awt.Color
+
     /**
      * Converts the components of a color, as specified by the default RGB
      * model, to an equivalent set of values for hue, saturation, and
@@ -89,12 +91,13 @@ public class Color {
      * The method
      * returns the array <code>hsbvals</code>, with the values put into
      * that array.
-     * @param     r   the red component of the color
-     * @param     g   the green component of the color
-     * @param     b   the blue component of the color
-     * @return    an array of three elements containing the hue, saturation,
-     *                     and brightness (in that order), of the color with
-     *                     the indicated red, green, and blue components.
+     *
+     * @param r the red component of the color
+     * @param g the green component of the color
+     * @param b the blue component of the color
+     * @return an array of three elements containing the hue, saturation,
+     * and brightness (in that order), of the color with
+     * the indicated red, green, and blue components.
      */
     public static float[] RGBtoHSB(int r, int g, int b) {
         float hue, saturation, brightness;
@@ -149,19 +152,20 @@ public class Color {
      * format used by the method {@link Color#getRGB()}  <code>getRGB</code>}.
      * This integer can be supplied as an argument to the
      * <code>Color</code> constructor that takes a single integer argument.
-     * @param     hue   the hue component of the color
-     * @param     saturation   the saturation of the color
-     * @param     brightness   the brightness of the color
-     * @return    the RGB value of the color with the indicated hue,
-     *                            saturation, and brightness.
+     *
+     * @param hue        the hue component of the color
+     * @param saturation the saturation of the color
+     * @param brightness the brightness of the color
+     * @return the RGB value of the color with the indicated hue,
+     * saturation, and brightness.
      */
     public static int HSBtoRGB(float hue, float saturation, float brightness) {
         int r = 0, g = 0, b = 0;
         if (saturation == 0) {
             r = g = b = (int) (brightness * 255.0f + 0.5f);
         } else {
-            float h = (hue - (float)Math.floor(hue)) * 6.0f;
-            float f = h - (float)java.lang.Math.floor(h);
+            float h = (hue - (float) Math.floor(hue)) * 6.0f;
+            float f = h - (float) java.lang.Math.floor(h);
             float p = brightness * (1.0f - saturation);
             float q = brightness * (1.0f - saturation * f);
             float t = brightness * (1.0f - (saturation * (1.0f - f)));
@@ -200,7 +204,6 @@ public class Color {
         }
         return 0xff000000 | (r << 16) | (g << 8) | (b << 0);
     }
-
 
 
 }

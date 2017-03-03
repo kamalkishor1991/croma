@@ -1,14 +1,16 @@
 package org.numixproject.colorextractor.image;
 //copied from here : http://rsb.info.nih.gov/ij/plugins/download/Color_Space_Converter.java
+
 /**
  * ColorSpaceConverter
+ *
  * @author dvs, hlp
- * Created Jan 15, 2004
- * Version 3 posted on ImageJ Mar 12, 2006 by Duane Schwartzwald
- *    vonschwartzwalder at mac.com
- * Version 4 created Feb. 27, 2007
- *   by Harry Parker, harrylparker at yahoo dot com,
- *   corrects RGB to XYZ (and LAB) conversion.
+ *         Created Jan 15, 2004
+ *         Version 3 posted on ImageJ Mar 12, 2006 by Duane Schwartzwald
+ *         vonschwartzwalder at mac.com
+ *         Version 4 created Feb. 27, 2007
+ *         by Harry Parker, harrylparker at yahoo dot com,
+ *         corrects RGB to XYZ (and LAB) conversion.
  */
 public class ColorSpaceConverter {
 
@@ -33,16 +35,16 @@ public class ColorSpaceConverter {
     /**
      * sRGB to XYZ conversion matrix
      */
-    public double[][] M   = {{0.4124, 0.3576,  0.1805},
-            {0.2126, 0.7152,  0.0722},
-            {0.0193, 0.1192,  0.9505}};
+    public double[][] M = {{0.4124, 0.3576, 0.1805},
+            {0.2126, 0.7152, 0.0722},
+            {0.0193, 0.1192, 0.9505}};
 
     /**
      * XYZ to sRGB conversion matrix
      */
-    public double[][] Mi  = {{ 3.2406, -1.5372, -0.4986},
-            {-0.9689,  1.8758,  0.0415},
-            { 0.0557, -0.2040,  1.0570}};
+    public double[][] Mi = {{3.2406, -1.5372, -0.4986},
+            {-0.9689, 1.8758, 0.0415},
+            {0.0557, -0.2040, 1.0570}};
 
     /**
      * default constructor, uses D65 for the white point
@@ -54,6 +56,7 @@ public class ColorSpaceConverter {
 
     /**
      * constructor for setting a non-default white point
+     *
      * @param white String specifying the white point to use
      */
     public ColorSpaceConverter(String white) {
@@ -62,16 +65,13 @@ public class ColorSpaceConverter {
         if (white.equalsIgnoreCase("d50")) {
             whitePoint = D50;
             chromaWhitePoint = chromaD50;
-        }
-        else if (white.equalsIgnoreCase("d55")) {
+        } else if (white.equalsIgnoreCase("d55")) {
             whitePoint = D55;
             chromaWhitePoint = chromaD55;
-        }
-        else if (white.equalsIgnoreCase("d65")) {
+        } else if (white.equalsIgnoreCase("d65")) {
             whitePoint = D65;
             chromaWhitePoint = chromaD65;
-        }
-        else if (white.equalsIgnoreCase("d75")) {
+        } else if (white.equalsIgnoreCase("d75")) {
             whitePoint = D75;
             chromaWhitePoint = chromaD75;
         }
@@ -98,6 +98,7 @@ public class ColorSpaceConverter {
 
     /**
      * Convert LAB to RGB.
+     *
      * @param L
      * @param a
      * @param b
@@ -117,6 +118,7 @@ public class ColorSpaceConverter {
 
     /**
      * Convert LAB to XYZ.
+     *
      * @param L
      * @param a
      * @param b
@@ -134,20 +136,17 @@ public class ColorSpaceConverter {
 
         if (y3 > 0.008856) {
             y = y3;
-        }
-        else {
+        } else {
             y = (y - (16.0 / 116.0)) / 7.787;
         }
         if (x3 > 0.008856) {
             x = x3;
-        }
-        else {
+        } else {
             x = (x - (16.0 / 116.0)) / 7.787;
         }
         if (z3 > 0.008856) {
             z = z3;
-        }
-        else {
+        } else {
             z = (z - (16.0 / 116.0)) / 7.787;
         }
 
@@ -160,15 +159,13 @@ public class ColorSpaceConverter {
 
     /**
      * Convert LAB to XYZ.
+     *
      * @param Lab
      * @return XYZ values
      */
     public double[] LABtoXYZ(double[] Lab) {
         return LABtoXYZ(Lab[0], Lab[1], Lab[2]);
     }
-
-
-
 
 
     /**
@@ -191,6 +188,7 @@ public class ColorSpaceConverter {
 
     /**
      * Convert RGB to XYZ
+     *
      * @param R
      * @param G
      * @param B
@@ -207,20 +205,17 @@ public class ColorSpaceConverter {
         // assume sRGB
         if (r <= 0.04045) {
             r = r / 12.92;
-        }
-        else {
+        } else {
             r = Math.pow(((r + 0.055) / 1.055), 2.4);
         }
         if (g <= 0.04045) {
             g = g / 12.92;
-        }
-        else {
+        } else {
             g = Math.pow(((g + 0.055) / 1.055), 2.4);
         }
         if (b <= 0.04045) {
             b = b / 12.92;
-        }
-        else {
+        } else {
             b = Math.pow(((b + 0.055) / 1.055), 2.4);
         }
 
@@ -238,6 +233,7 @@ public class ColorSpaceConverter {
 
     /**
      * Convert RGB to XYZ
+     *
      * @param RGB
      * @return XYZ in double array.
      */
@@ -257,8 +253,7 @@ public class ColorSpaceConverter {
             result[0] = 0;
             result[1] = 0;
             result[2] = 0;
-        }
-        else {
+        } else {
             result[0] = (x * Y) / y;
             result[1] = Y;
             result[2] = ((1 - x - y) * Y) / y;
@@ -276,6 +271,7 @@ public class ColorSpaceConverter {
 
     /**
      * Convert XYZ to LAB.
+     *
      * @param X
      * @param Y
      * @param Z
@@ -289,20 +285,17 @@ public class ColorSpaceConverter {
 
         if (x > 0.008856) {
             x = Math.pow(x, 1.0 / 3.0);
-        }
-        else {
+        } else {
             x = (7.787 * x) + (16.0 / 116.0);
         }
         if (y > 0.008856) {
             y = Math.pow(y, 1.0 / 3.0);
-        }
-        else {
+        } else {
             y = (7.787 * y) + (16.0 / 116.0);
         }
         if (z > 0.008856) {
             z = Math.pow(z, 1.0 / 3.0);
-        }
-        else {
+        } else {
             z = (7.787 * z) + (16.0 / 116.0);
         }
 
@@ -317,6 +310,7 @@ public class ColorSpaceConverter {
 
     /**
      * Convert XYZ to LAB.
+     *
      * @param XYZ
      * @return Lab values
      */
@@ -326,6 +320,7 @@ public class ColorSpaceConverter {
 
     /**
      * Convert XYZ to RGB.
+     *
      * @param X
      * @param Y
      * @param Z
@@ -346,20 +341,17 @@ public class ColorSpaceConverter {
         // assume sRGB
         if (r > 0.0031308) {
             r = ((1.055 * Math.pow(r, 1.0 / 2.4)) - 0.055);
-        }
-        else {
+        } else {
             r = (r * 12.92);
         }
         if (g > 0.0031308) {
             g = ((1.055 * Math.pow(g, 1.0 / 2.4)) - 0.055);
-        }
-        else {
+        } else {
             g = (g * 12.92);
         }
         if (b > 0.0031308) {
             b = ((1.055 * Math.pow(b, 1.0 / 2.4)) - 0.055);
-        }
-        else {
+        } else {
             b = (b * 12.92);
         }
 
@@ -368,7 +360,7 @@ public class ColorSpaceConverter {
         b = (b < 0) ? 0 : b;
 
         // LAB to RGB conversion is wrong thats why adding check
-       // 91.28654738944347, -3.6725617351839017,52.83941149939641
+        // 91.28654738944347, -3.6725617351839017,52.83941149939641
 
         r = r > 1 ? 1 : r;
         g = g > 1 ? 1 : g;
@@ -384,6 +376,7 @@ public class ColorSpaceConverter {
 
     /**
      * Convert XYZ to RGB
+     *
      * @param XYZ in a double array.
      * @return RGB in int array.
      */
@@ -403,8 +396,7 @@ public class ColorSpaceConverter {
             result[0] = chromaWhitePoint[0];
             result[1] = chromaWhitePoint[1];
             result[2] = chromaWhitePoint[2];
-        }
-        else {
+        } else {
             result[0] = X / (X + Y + Z);
             result[1] = Y / (X + Y + Z);
             result[2] = Y;

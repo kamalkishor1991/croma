@@ -18,8 +18,8 @@ public class MedianCutColorPicker implements ColorPicker {
         Image image = img.getScaledInstance(noOfColors, 1);
         List<Color> r = new ArrayList<Color>();
         Set<Color> set = new HashSet<Color>();
-        for (int i = 0 ;i < image.getWidth();i++) {
-            for (int j = 0;j < image.getHeight();j++) {
+        for (int i = 0; i < image.getWidth(); i++) {
+            for (int j = 0; j < image.getHeight(); j++) {
                 Color c = image.getColor(i, j);
                 if (!set.contains(c)) r.add(c);
                 set.add(c);

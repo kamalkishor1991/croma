@@ -13,6 +13,7 @@ import java.io.IOException;
  */
 public class AWTImage extends org.numixproject.colorextractor.image.Image {
     protected BufferedImage br;
+
     public AWTImage(BufferedImage br) {
         super(br.getWidth(), br.getHeight());
         this.br = br;
@@ -29,18 +30,16 @@ public class AWTImage extends org.numixproject.colorextractor.image.Image {
 
 
     /**
-     *
-     * @param width the width to which to scale the image.
+     * @param width  the width to which to scale the image.
      * @param height the height to which to scale the image.
      * @return new scaled Instance of AWTImage
      */
     @Override
     public org.numixproject.colorextractor.image.Image getScaledInstance(int width, int height) {
-        java.awt.Image  im = br.getScaledInstance(width, height, BufferedImage.SCALE_DEFAULT);
+        java.awt.Image im = br.getScaledInstance(width, height, BufferedImage.SCALE_DEFAULT);
         BufferedImage t = AWTImage.toBufferedImage(im);
         return new AWTImage(t);
     }
-
 
 
     /**
@@ -49,10 +48,8 @@ public class AWTImage extends org.numixproject.colorextractor.image.Image {
      * @param img The Image to be converted
      * @return The converted BufferedImage
      */
-    public static BufferedImage toBufferedImage(java.awt.Image img)
-    {
-        if (img instanceof BufferedImage)
-        {
+    public static BufferedImage toBufferedImage(java.awt.Image img) {
+        if (img instanceof BufferedImage) {
             return (BufferedImage) img;
         }
 
@@ -67,8 +64,6 @@ public class AWTImage extends org.numixproject.colorextractor.image.Image {
         // Return the buffered image
         return bimage;
     }
-
-
 
 
 }

@@ -1,7 +1,6 @@
 package org.numixproject.colorextractor.test;
 
 
-
 import org.numixproject.colorextractor.image.*;
 import org.numixproject.colorextractor.image.Color;
 
@@ -15,16 +14,16 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 
 public class TestColorPicker {
-	public static void main(String args[])  {
+    public static void main(String args[]) {
         System.out.println(System.getProperty("user.dir"));
         try {
 
-            String file = args.length != 0 ? args[0] :(System.getProperty("user.dir")
-                    + File.separator + "test" + File.separator );
+            String file = args.length != 0 ? args[0] : (System.getProperty("user.dir")
+                    + File.separator + "test" + File.separator);
             int algo = args.length >= 2 ? Integer.parseInt(args[2]) : 0;
             int noOfColors = args.length >= 3 ? Integer.parseInt(args[1]) : 6;
 
-            genColors(new File(file),algo, noOfColors);
+            genColors(new File(file), algo, noOfColors);
         } catch (IOException e) {
             System.out.println("Usage: <Images dir path> <noOfColors> <algo (0 or 1)>");
             e.printStackTrace();
@@ -32,30 +31,30 @@ public class TestColorPicker {
 
     }
 
-	private static void genColors(File file, int algo, int noC) throws IOException {
+    private static void genColors(File file, int algo, int noC) throws IOException {
         PrintStream ps = new PrintStream(file.getAbsolutePath() + "/output" + algo + ".html");
         for (File f : file.listFiles()) {
-            if(isImage(f)) {
+            if (isImage(f)) {
                 System.out.println(f);
                 genHtml(f, algo, noC, ps);
             }
         }
 
-		ps.println("</BODY>");
-		ps.println("</HTML>");
-		ps.close();
-	}
+        ps.println("</BODY>");
+        ps.println("</HTML>");
+        ps.close();
+    }
 
     private static void genHtml(File file, int algo, int noC, PrintStream ps) throws IOException {
         ps.println("<HTML>");
         ps.println("<BODY>");
         String s = "<div color=\"#3CA\" style=\"\n" +
-				"    size: a3;\n" +
-				"    width: 50px;\n" +
+                "    size: a3;\n" +
+                "    width: 50px;\n" +
                 "display: table-cell;\n" +
-				"    height: 50px;margin:10px;\n" +
-				"    background: %s\n" +
-				"\"></div>";
+                "    height: 50px;margin:10px;\n" +
+                "    background: %s\n" +
+                "\"></div>";
 
         //
         org.numixproject.colorextractor.image.Image img = new AWTImage(file);
@@ -86,18 +85,16 @@ public class TestColorPicker {
     public static int[][] getImage(File image, int w, int h) throws IOException {
 
         BufferedImage bi = ImageIO.read(image);
-        java.awt.Image  im = bi.getScaledInstance(h, w, BufferedImage.SCALE_DEFAULT);
+        java.awt.Image im = bi.getScaledInstance(h, w, BufferedImage.SCALE_DEFAULT);
         bi = toBufferedImage(im);
         int v[][] = new int[h][w];
-        for (int i = 0; i < v.length;i++) {
-            for (int j = 0;j < v[0].length;j++) {
+        for (int i = 0; i < v.length; i++) {
+            for (int j = 0; j < v[0].length; j++) {
                 v[i][j] = bi.getRGB(i, j);
             }
         }
         return v;
     }
-
-
 
 
     /**
@@ -106,10 +103,8 @@ public class TestColorPicker {
      * @param img The Image to be converted
      * @return The converted BufferedImage
      */
-    private static BufferedImage toBufferedImage(java.awt.Image img)
-    {
-        if (img instanceof BufferedImage)
-        {
+    private static BufferedImage toBufferedImage(java.awt.Image img) {
+        if (img instanceof BufferedImage) {
             return (BufferedImage) img;
         }
 
@@ -126,10 +121,9 @@ public class TestColorPicker {
     }
 
 
-
     private static boolean isImage(File f) {
-        if(f.getName().toLowerCase().endsWith(".png")) return true;
-        String mimetype= new MimetypesFileTypeMap().getContentType(f);
+        if (f.getName().toLowerCase().endsWith(".png")) return true;
+        String mimetype = new MimetypesFileTypeMap().getContentType(f);
         String type = mimetype.split("/")[0];
         return type.equalsIgnoreCase("image");
     }
