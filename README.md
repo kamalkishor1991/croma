@@ -6,7 +6,7 @@ Lib for getting useful colors from an image.
 
 Croma is now avialable at jcenter.
 #### Gradle
-``` compile 'org.numixproject.colorextractor:colorextractor:1.4' ```
+``` implementation 'org.numixproject.colorextractor:colorextractor:1.4' ```
 #### Maven
 ```
 <dependency>
